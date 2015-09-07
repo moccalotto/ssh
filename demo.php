@@ -1,8 +1,3 @@
-# SSH library.
-
-Wrapper for the SSH2 PECL.
-
-```php
 #!/usr/bin/env php
 <?php
 
@@ -76,4 +71,3 @@ echo $ssh->withTerminal($terminal)->shell(function($shell) {
     return $captured_output;
 
 });
-```
