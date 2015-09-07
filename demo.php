@@ -22,7 +22,6 @@ $keypass = 'my_password';
 | Connect to specified IP and port, and authorize via SSH key.
 | You can authorize via password by calling Auth::viaPassword($username, $password)
 */
-
 $ssh = new Session(
     Connect::to($ip, $port),
     Auth::viaKeyFile($username, $pubkeyfile, $privkeyfile, $keypass)
@@ -41,8 +40,8 @@ $terminal = Terminal::create()
     ->height(25, 'chars');
 
 
-/* 
-| Execute a single command on the remote server 
+/*
+| Execute a single command on the remote server
 | ----------------------------------------------
 | Capture its output and echo it on the local screen.
 */
@@ -53,14 +52,14 @@ echo $ssh->withTerminal($terminal)->execute('echo $HOME $PWD');
 /*
 | Open a shell on the remote server
 |--------------------------
-| Open a shell. 
+| Open a shell.
 | Execute a few commands.
 | Logout.
 | Print the output from the shell.
 | The shell is automatically closed when callback returns.
 */
 echo $ssh->withTerminal($terminal)->shell(function($shell) {
-    
+
     $captured_output = $shell
         ->writeline('echo The home dir is: $HOME')
         ->writeline('echo the contents of $PWD is:; ls -lah')
