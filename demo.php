@@ -48,6 +48,15 @@ $terminal = Terminal::create()
 */
 echo $ssh->withTerminal($terminal)->execute('echo $HOME $PWD');
 
+/*
+| Send a file via SCP
+| --------------------
+| Simply send this file (demo.php) to the remote server.
+*/
+if ($ssh->sendFile(__FILE__, basename(__FILE__))) {
+    printf('File: %s was sent to the remote server' . PHP_EOL, basename($file));
+}
+
 
 
 /*
