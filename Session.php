@@ -233,4 +233,9 @@ class Session
     {
         return ssh2_scp_recv($this->session, $remote_file, $local_file);
     }
+
+    public function sftp()
+    {
+        return new Sftp(ssh2_sftp($this->session));
+    }
 }
