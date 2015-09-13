@@ -28,14 +28,14 @@ class Session
      *
      * @param ConnectorContract $connection
      * @param AuthenticatorContract $authentication
-     * 
+     *
      * @throws ConnectionException if connection could not be established.
      * @throws AuthenticationException if the user could not be authenticated.
-     */ 
+     */
     public function __construct(ConnectorContract $connection, AuthenticatorContract $authentication)
     {
         $session = $connection->createSessionResource();
-        
+
         if (!$session) {
             throw new ConnectionException('Could not establish SSH connection');
         }
@@ -106,7 +106,7 @@ class Session
      * @param string $algorithm sha1|md5
      * @param string $encoding  hex|raw
      * @return string
-     * 
+     *
      * @throws UnexpectedValueException if $algorithm or $encoding is incorrect
      */
     public function fingerprint($algorithm = 'sha1', $encoding = 'hex')
