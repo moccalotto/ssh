@@ -204,7 +204,7 @@ class Session
             $this->terminal->getDimensionUnits() // the units (pixels or chars) of the width and height
         ));
 
-        $result = $callback($exec_stream->async());
+        $result = $callback($stream->async());
         $stream->close();
 
         return $result;
