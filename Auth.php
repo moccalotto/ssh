@@ -50,7 +50,7 @@ class Auth implements Contract\AuthenticatorContract
      */
     public static function viaAgent($username)
     {
-        return new static('ssh2_auth_pubkey_file', func_get_args());
+        return new static('ssh2_auth_agent', func_get_args());
     }
 
     public function authenticateSessionResource($resource)
