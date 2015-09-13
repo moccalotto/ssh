@@ -26,6 +26,7 @@ $keypass = 'my_password';
 |-----------------------
 | Connect to specified IP and port, and authorize via SSH key.
 | You can authorize via password by calling Auth::viaPassword($username, $password)
+| You can authorize via SSH agent by calling Auth::viaAgent($username)
 */
 $ssh = new Session(
     Connect::to($ip, $port),
@@ -51,6 +52,15 @@ $terminal = Terminal::create()
 | Capture its output and echo it on the local screen.
 */
 echo $ssh->withTerminal($terminal)->execute('echo $HOME $PWD');
+
+/*
+| Send a file via SCP
+| --------------------
+| Simply send this file (demo.php) to the remote server.
+*/
+if ($ssh->sendFile(__FILE__, basename(__FILE__))) {
+    printf('File: %s was sent to the remote server' . PHP_EOL, basename($file));
+}
 
 
 
