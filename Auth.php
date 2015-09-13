@@ -20,6 +20,8 @@ class Auth implements Contract\AuthenticatorContract
      * Additional params for the ssh2_auth_* call
      * First agument must be the ssh2 session resource.
      * The rest of the arguments are contained in this variable
+     *
+     * @var array
      */
     protected $params;
 
@@ -31,6 +33,12 @@ class Auth implements Contract\AuthenticatorContract
 
     /**
      * Create password authentication object.
+     *
+     * Used when you log in only using username and password.
+     *
+     * @param string $username
+     * @param string $password
+     * @return Auth
      */
     public static function viaPassword($username, $password)
     {
@@ -39,6 +47,14 @@ class Auth implements Contract\AuthenticatorContract
 
     /**
      * Create key-file authentication object.
+     *
+     * Used when you log in using a specific private key.
+     *
+     * @param string $username
+     * @param string $pubkeyfile The path of the public key file (i.e. id_rsa.pub)
+     * @param string $privkeyfile The path of the private key file (i.e. id_rsa)
+     * @param string $passphrase The passphrase that is used to encrypt the private key.
+     * @return Auth
      */
     public static function viaKeyFile($username, $pubkeyfile, $privkeyfile, $passphrase = null)
     {
@@ -47,12 +63,26 @@ class Auth implements Contract\AuthenticatorContract
 
     /**
      * Create agent-based authentication object
+     *
+     * Used when you log in using the OS's SSH agent.
+     * If your private key is encrypted, the SSH agent will prompt you for a password,
+     * so this auth scheme works best in CLI applications.
+     *
+     * @param string $username
+     * @return Auth;
      */
     public static function viaAgent($username)
     {
         return new static('ssh2_auth_agent', func_get_args());
     }
 
+    /**
+     * Authenticate an SSH session resource.
+     *
+     * @internal
+     * @return bool
+     * @throws UnexpectedValueException if $resource is not a valid SSH2 session resource.
+     */
     public function authenticateSessionResource($resource)
     {
         if (!Valid::sshSessionResource($resource)) {
