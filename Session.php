@@ -208,4 +208,29 @@ class Session
 
         return $result;
     }
+
+    /**
+     * Send a file to remote server via SCP.
+     *
+     * @param string $local_file
+     * @param string $remote_file
+     * @param int $create_mode The remote file will be created with the specified mode.
+     * @return bool true if successful.
+     */
+    public function sendFile($local_file, $remote_file, $create_mode = 0644)
+    {
+        return ssh2_scp_send($this->session, $local_file, $remote_file, $create_mode);
+    }
+
+    /**
+     * Fetch a file from the remote server via SCP.
+     *
+     * @param string $remote_file
+     * @param string $local_file
+     * @return bool true if successful
+     */
+    public function getFile($remote_file, $local_file)
+    {
+        return ssh2_scp_recv($this->session, $remote_file, $local_file);
+    }
 }
