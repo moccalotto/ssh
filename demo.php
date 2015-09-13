@@ -21,6 +21,7 @@ $keypass = 'my_password';
 |-----------------------
 | Connect to specified IP and port, and authorize via SSH key.
 | You can authorize via password by calling Auth::viaPassword($username, $password)
+| You can authorize via SSH agent by calling Auth::viaAgent($username)
 */
 $ssh = new Session(
     Connect::to($ip, $port),
