@@ -34,6 +34,26 @@ $ssh = new Session(
 );
 
 
+
+/*
+| Open a SFTP channel
+|---------------------
+| Generate a random number, write it to a file on the remote server.
+| Read the number back from the file.
+*/
+$sftp = $ssh->sftp();
+$random = mt_rand();
+$sftp->putContents('testFile.txt', $random);
+
+if ($random == $sftp->getContents('testFile.txt')) {
+    echo 'File testFile.txt was written on remote server, and the contents verified';
+    echo PHP_EOL;
+} else {
+    echo 'File testFile.txt was written on remote server, but the contents could not be verified';
+    echo PHP_EOL;
+}
+
+
 /*
 | Create terminal settings
 |--------------------------
@@ -50,8 +70,10 @@ $terminal = Terminal::create()
 | Execute a single command on the remote server
 | ----------------------------------------------
 | Capture its output and echo it on the local screen.
-*/
+ */
+echo 'Output of »echo $HOME $PWD«: ';
 echo $ssh->withTerminal($terminal)->execute('echo $HOME $PWD');
+echo PHP_EOL;
 
 /*
 | Send a file via SCP
@@ -59,7 +81,7 @@ echo $ssh->withTerminal($terminal)->execute('echo $HOME $PWD');
 | Simply send this file (demo.php) to the remote server.
 */
 if ($ssh->sendFile(__FILE__, basename(__FILE__))) {
-    printf('File: %s was sent to the remote server' . PHP_EOL, basename($file));
+    printf('File: %s was sent to the remote server' . PHP_EOL, basename(__FILE__));
 }
 
 
