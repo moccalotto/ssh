@@ -21,9 +21,9 @@ class Sftp
     public function wrapperForFile($filename)
     {
         return sprintf(
-            'ssh2.sftp://%s%s/%s', 
-            $this->resource, 
-            ssh2_sftp_realpath($this->resource, '.'), 
+            'ssh2.sftp://%s%s/%s',
+            $this->resource,
+            ssh2_sftp_realpath($this->resource, '.'),
             $filename
         );
     }
