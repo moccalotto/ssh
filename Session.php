@@ -147,8 +147,7 @@ class Session
             $this->terminal->getHeight(),   // the height of the terminal
             $this->terminal->getDimensionUnits() // the units (pixels or chars) of the width and height
         ));
-
-        return $stream->readAndClose();
+        return $stream->readAndClose(true);
     }
 
     /**

@@ -207,11 +207,16 @@ class ExecutionStream
 
     /**
      * Read all unconsumed data from the stdio stream and close it.
+     * @param bool $wait_for_eof should we read until EOF or until end of input.
      * @return string
      */
-    public function readAndClose()
+    public function readAndClose($wait_for_eof)
     {
-        $this->async();
+        if ($wait_for_eof) {
+            $this->sync();
+        } else {
+            $this->async();
+        }
         $result = $this->readToEnd();
         $this->close();
         return $result;
