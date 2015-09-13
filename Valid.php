@@ -61,4 +61,18 @@ class Valid
 
         return true;
     }
+
+
+    public static function sshSftpResource($resource)
+    {
+        if (!is_resource($resource)) {
+            return false;
+        }
+
+        if (get_resource_type($resource) !== 'SSH2 SFTP') {
+            return false;
+        }
+
+        return true;
+    }
 }
