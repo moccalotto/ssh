@@ -62,12 +62,7 @@ class Valid
         return true;
     }
 
-    /**
-     * Check if param is a valid SSH2 SFTP Resource
-     *
-     * @param mixed $resource THe value to be checked.
-     * @return boolean
-     */
+
     public static function sshSftpResource($resource)
     {
         if (!is_resource($resource)) {
