@@ -1,5 +1,5 @@
 {
-    "name": "moccalotto/ssh", 
+    "name": "moccalotto/ssh",
     "type": "library",
     "description": "libssh2 wrapper for php",
     "keywords": ["ssh"],
@@ -16,6 +16,9 @@
         }
     ],
     "require-dev": {
+    },
+    "archive": {
+        "exclude": ["demo.php"]
     },
     "autoload" : {
         "psr-4": {
