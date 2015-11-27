@@ -18,61 +18,61 @@ class Sftp
         $this->resource = $resource;
     }
 
-    public function wrapperForFile($filename)
+    public function streamUri($remote_file)
     {
         return sprintf(
             'ssh2.sftp://%s%s/%s',
             $this->resource,
             ssh2_sftp_realpath($this->resource, '.'),
-            $filename
+            $remote_file
         );
     }
 
     /**
      * Get contents of remote file
      *
-     * @param string $filename
+     * @param string $remote_file
      * @return string The contents of the file
      */
-    public function getContents($filename)
+    public function getContents($remote_file)
     {
-        return file_get_contents($this->wrapperForFile($filename));
+        return file_get_contents($this->streamUri($remote_file));
     }
 
     /**
      * Write a string to a remote file
      *
-     * @param string $filename
+     * @param string $remote_file
      * @param string $contents
      * @return int The number of bytes written
      */
-    public function putContents($filename, $contents)
+    public function putContents($remote_file, $contents)
     {
-        return file_put_contents($this->wrapperForFile($filename), $contents);
+        return file_put_contents($this->streamUri($remote_file), $contents);
     }
 
     /**
      * Remote fopen
      *
-     * @param string $filename
+     * @param string $remote_file
      * @param string $mode
      * @return resource
      */
-    public function fopen($filename, $mode)
+    public function fopen($remote_file, $mode)
     {
-        return fopen($this->wrapperForFile($filename), $mode);
+        return fopen($this->streamUri($remote_file), $mode);
     }
 
     /**
      * Remote chmod
      *
-     * @param string $filename
+     * @param string $remote_file
      * @param int $mode
      * @return bool success
      */
-    public function chmod($filename, $mode)
+    public function chmod($remote_file, $mode)
     {
-        return ssh2_sftp_chmod($this->resource, $filename, $mode);
+        return ssh2_sftp_chmod($this->resource, $remote_file, $mode);
     }
 
     /**
@@ -113,10 +113,10 @@ class Sftp
     /**
      * Remote realpath
      *
-     * @param string $filename
+     * @param string $remote_file
      * @return string
      */
-    public function realpath($filename)
+    public function realpath($remote_file)
     {
         return ssh2_sftp_realpath($this->resource, $path);
     }
@@ -170,11 +170,11 @@ class Sftp
     /**
      * Remote unlink / delete
      *
-     * @param string $filename
+     * @param string $remote_file
      * @return bool
      */
-    public function unlink($filename)
+    public function unlink($remote_file)
     {
-        ssh2_sftp_unlink($this->resource, $filename);
+        ssh2_sftp_unlink($this->resource, $remote_file);
     }
 }
