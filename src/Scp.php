@@ -2,8 +2,8 @@
 
 namespace Moccalotto\Ssh;
 
-use Moccalotto\Ssh\Contract\ConnectorContract;
-use Moccalotto\Ssh\Contract\AuthenticatorContract;
+use Moccalotto\Ssh\Contracts\ConnectorContract;
+use Moccalotto\Ssh\Contracts\AuthenticatorContract;
 
 abstract class Scp
 {

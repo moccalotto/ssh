@@ -1,6 +1,6 @@
 <?php
 
-namespace Moccalotto\Ssh\Contract;
+namespace Moccalotto\Ssh\Contracts;
 
 interface ConnectorContract
 {

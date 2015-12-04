@@ -4,7 +4,7 @@ namespace Moccalotto\Ssh;
 
 use UnexpectedValueException;
 
-class Auth implements Contract\AuthenticatorContract
+class Auth implements Contracts\AuthenticatorContract
 {
     /**
      * Authentication method.

@@ -4,7 +4,7 @@ namespace Moccalotto\Ssh;
 
 use UnexpectedValueException;
 
-class Connect implements Contract\ConnectorContract
+class Connect implements Contracts\ConnectorContract
 {
     protected $host;
 
