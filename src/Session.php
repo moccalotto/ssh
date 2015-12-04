@@ -9,12 +9,11 @@ use Moccalotto\Ssh\Contract\AuthenticatorContract;
 class Session
 {
     /**
-     * SSH2 Session Resource
+     * SSH2 Session Resource.
      *
      * @var resource
      */
     protected $session;
-
 
     /**
      * The terminal to use for shells and one-off-executions.
@@ -24,12 +23,12 @@ class Session
     protected $terminal;
 
     /**
-     * Construct new SSH2 Session
+     * Construct new SSH2 Session.
      *
-     * @param ConnectorContract $connection
+     * @param ConnectorContract     $connection
      * @param AuthenticatorContract $authentication
      *
-     * @throws ConnectionException if connection could not be established.
+     * @throws ConnectionException     if connection could not be established.
      * @throws AuthenticationException if the user could not be authenticated.
      */
     public function __construct(ConnectorContract $connection, AuthenticatorContract $authentication)
@@ -49,9 +48,10 @@ class Session
     }
 
     /**
-     * Get the SSH2 fingerprint algorithm ID
+     * Get the SSH2 fingerprint algorithm ID.
      *
      * @param string $algorithm md5|hex
+     *
      * @return int
      *
      * @throws UnexpectedValueException if the encoding name is incorrect
@@ -59,7 +59,7 @@ class Session
     public function getFingerprintAlgorithmId($algorithm)
     {
         $map = [
-            'md5'  => SSH2_FINGERPRINT_MD5,
+            'md5' => SSH2_FINGERPRINT_MD5,
             'sha1' => SSH2_FINGERPRINT_SHA1,
         ];
 
@@ -75,9 +75,10 @@ class Session
     }
 
     /**
-     * Get the SSH2 fingerprint encoding ID
+     * Get the SSH2 fingerprint encoding ID.
      * 
      * @param string $encoding hex|raw
+     *
      * @return int
      *
      * @throws UnexpectedValueException if the encoding name is incorrect
@@ -85,7 +86,7 @@ class Session
     public function getFingerprintEncodingId($encoding)
     {
         $map = [
-            'hex'  => SSH2_FINGERPRINT_HEX,
+            'hex' => SSH2_FINGERPRINT_HEX,
             'raw' => SSH2_FINGERPRINT_RAW,
         ];
 
@@ -105,6 +106,7 @@ class Session
      *
      * @param string $algorithm sha1|md5
      * @param string $encoding  hex|raw
+     *
      * @return string
      *
      * @throws UnexpectedValueException if $algorithm or $encoding is incorrect
@@ -118,11 +120,13 @@ class Session
      * Set the terminal to use for the next execution or shell.
      *
      * @param Terminal $terminal
+     *
      * @return $this
      */
     public function withTerminal(Terminal $terminal)
     {
         $this->terminal = $terminal;
+
         return $this;
     }
 
@@ -134,6 +138,7 @@ class Session
      * It is therefore IMPORTANT you only execute programs that terminate.
      *
      * @param string $cmd the command to execute
+     *
      * @return string the output of the commmand
      */
     public function execute($cmd)
@@ -147,6 +152,7 @@ class Session
             $this->terminal->getHeight(),   // the height of the terminal
             $this->terminal->getDimensionUnits() // the units (pixels or chars) of the width and height
         ));
+
         return $stream->readAndClose(true);
     }
 
@@ -163,6 +169,7 @@ class Session
      * mixed callback(ExecutionStream $io)
      *
      * @param callable $callback
+     *
      * @return mixed the value that $calback returned.
      */
     public function run(callback $callback)
@@ -190,9 +197,10 @@ class Session
      * mixed callback(ExecutionStream $io)
      *
      * @param callable $callback
+     *
      * @return mixed the result from executing callback.
      */
-    public function shell(callable $callback) 
+    public function shell(callable $callback)
     {
         $stream = new ExecutionStream(ssh2_shell(
             $this->session,                 // the session resource.
@@ -214,7 +222,8 @@ class Session
      *
      * @param string $local_file
      * @param string $remote_file
-     * @param int $create_mode The remote file will be created with the specified mode.
+     * @param int    $create_mode The remote file will be created with the specified mode.
+     *
      * @return bool true if successful.
      */
     public function sendFile($local_file, $remote_file, $create_mode = 0644)
@@ -227,6 +236,7 @@ class Session
      *
      * @param string $remote_file
      * @param string $local_file
+     *
      * @return bool true if successful
      */
     public function getFile($remote_file, $local_file)

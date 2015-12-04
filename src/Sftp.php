@@ -1,10 +1,8 @@
-<?php 
+<?php
 
 namespace Moccalotto\Ssh;
 
 use UnexpectedValueException;
-use Moccalotto\Ssh\Contract\ConnectorContract;
-use Moccalotto\Ssh\Contract\AuthenticatorContract;
 
 class Sftp
 {
@@ -29,9 +27,10 @@ class Sftp
     }
 
     /**
-     * Get contents of remote file
+     * Get contents of remote file.
      *
      * @param string $remote_file
+     *
      * @return string The contents of the file
      */
     public function getContents($remote_file)
@@ -40,10 +39,11 @@ class Sftp
     }
 
     /**
-     * Write a string to a remote file
+     * Write a string to a remote file.
      *
      * @param string $remote_file
      * @param string $contents
+     *
      * @return int The number of bytes written
      */
     public function putContents($remote_file, $contents)
@@ -52,10 +52,11 @@ class Sftp
     }
 
     /**
-     * Remote fopen
+     * Remote fopen.
      *
      * @param string $remote_file
      * @param string $mode
+     *
      * @return resource
      */
     public function fopen($remote_file, $mode)
@@ -64,10 +65,11 @@ class Sftp
     }
 
     /**
-     * Remote chmod
+     * Remote chmod.
      *
      * @param string $remote_file
-     * @param int $mode
+     * @param int    $mode
+     *
      * @return bool success
      */
     public function chmod($remote_file, $mode)
@@ -76,9 +78,10 @@ class Sftp
     }
 
     /**
-     * Stat a symbolic link
+     * Stat a symbolic link.
      *
      * @param string $path
+     *
      * @return array
      */
     public function lstat($path)
@@ -90,8 +93,9 @@ class Sftp
      * Remote mkdir.
      *
      * @param string $dirname
-     * @param int $mode
-     * @param bool $recursive
+     * @param int    $mode
+     * @param bool   $recursive
+     *
      * @return bool
      */
     public function mkdir($dirname, $mode, $recursive = false)
@@ -100,9 +104,10 @@ class Sftp
     }
 
     /**
-     * Return the target of a remote link
+     * Return the target of a remote link.
      *
      * @param string $link
+     *
      * @return string
      */
     public function readlink($link)
@@ -111,9 +116,10 @@ class Sftp
     }
 
     /**
-     * Remote realpath
+     * Remote realpath.
      *
      * @param string $remote_file
+     *
      * @return string
      */
     public function realpath($remote_file)
@@ -122,10 +128,11 @@ class Sftp
     }
 
     /**
-     * Remote rename
+     * Remote rename.
      *
      * @param string $from
      * @param string $to
+     *
      * @return bool
      */
     public function rename($from, $to)
@@ -134,9 +141,10 @@ class Sftp
     }
 
     /**
-     * Remote rmdir
+     * Remote rmdir.
      *
      * @param string $dirname
+     *
      * @return bool
      */
     public function rmdir($dirname)
@@ -145,9 +153,10 @@ class Sftp
     }
 
     /**
-     * Remote stat
+     * Remote stat.
      *
      * @param string $path
+     *
      * @return array
      */
     public function stat($path)
@@ -156,10 +165,11 @@ class Sftp
     }
 
     /**
-     * Remote symlink
+     * Remote symlink.
      *
      * @param string $target
      * @param string $link
+     *
      * @return bool
      */
     public function symlink($target, $link)
@@ -168,9 +178,10 @@ class Sftp
     }
 
     /**
-     * Remote unlink / delete
+     * Remote unlink / delete.
      *
      * @param string $remote_file
+     *
      * @return bool
      */
     public function unlink($remote_file)

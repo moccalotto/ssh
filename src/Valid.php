@@ -2,13 +2,14 @@
 
 namespace Moccalotto\Ssh;
 
-class Valid 
+class Valid
 {
     /**
      * Check if param is a valid TCP port number.
      *
      * @param mixed $port The valaue to be checked.
-     * @return boolean
+     *
+     * @return bool
      */
     public static function tcpPort($port)
     {
@@ -23,7 +24,8 @@ class Valid
      * Check if param is a valid stream resource.
      *
      * @param resource $resource The value to be checked.
-     * @return boolean
+     *
+     * @return bool
      */
     public static function streamResource($resource)
     {
@@ -47,7 +49,8 @@ class Valid
      * Check if param is a valid SSH2 Session resource.
      *
      * @param mixed $resource The value to be checked.
-     * @return boolean
+     *
+     * @return bool
      */
     public static function sshSessionResource($resource)
     {
@@ -63,10 +66,11 @@ class Valid
     }
 
     /**
-     * Check if param is a valid SSH2 SFTP Resource
+     * Check if param is a valid SSH2 SFTP Resource.
      *
      * @param mixed $resource THe value to be checked.
-     * @return boolean
+     *
+     * @return bool
      */
     public static function sshSftpResource($resource)
     {

@@ -8,12 +8,14 @@ class ExecutionStream
 {
     /**
      * stream that represents stdin and stdout in the current execution channel.
+     *
      * @var resource
      */
     protected $stdio;
 
     /**
      * stream that represents stderr in the current execution channel.
+     *
      * @var resource
      */
     protected $stderr;
@@ -22,6 +24,7 @@ class ExecutionStream
      * Construct an execution stream in blocking mode.
      *
      * @param resource $stream
+     *
      * @throws UnexpectedValueException if $stream is not a valid stream
      */
     public function __construct($stream)
@@ -54,6 +57,7 @@ class ExecutionStream
     {
         stream_set_blocking($this->stdio, 0);
         stream_set_blocking($this->stderr, 0);
+
         return $this;
     }
 
@@ -69,30 +73,34 @@ class ExecutionStream
     {
         stream_set_blocking($this->stdio, 1);
         stream_set_blocking($this->stderr, 1);
+
         return $this;
     }
 
     /**
-     * Sleep for a number of seconds
+     * Sleep for a number of seconds.
      *
      * @param float $seconds
+     *
      * @return $this
      */
     public function wait($seconds)
     {
         $microseconds_per_second = 1000000;
         usleep(round($microseconds_per_second * $seconds));
+
         return $this;
     }
 
     /**
-     * Write $string to stdio
+     * Write $string to stdio.
      *
      * @return $this;
      */
     public function write($string)
     {
         fwrite($this->stdio, $string);
+
         return $this;
     }
 
@@ -103,16 +111,17 @@ class ExecutionStream
      */
     public function writeline($string)
     {
-        return $this->write($string . PHP_EOL);
+        return $this->write($string.PHP_EOL);
     }
 
     /**
-     * Read $length bytes from stdio
+     * Read $length bytes from stdio.
      *
      * If the stream is in sync mode, this method will wait until
      * $length bytes of data becomes available.
      * If the stream is in async mode, this method may return less
      * than $length bytes, if less that $length bytes are available.
+     *
      * @see fgets
      *
      * @param int $length
@@ -125,12 +134,13 @@ class ExecutionStream
     }
 
     /**
-     * Read line from stdio
+     * Read line from stdio.
      *
      * If the stream is in sync mode, this method will wait until
      * a newline char becomes available.
      * If the stream is in async mode, and no newline char is available,
      * this method simply returns the contents of the stream.
+     *
      * @see fgets
      *
      * NB. the newline character is returned.
@@ -149,6 +159,7 @@ class ExecutionStream
      * the stream closes before it returns the contents of the stream.
      * If the stream is in sync mode, the current contents of the stream
      * will be returned.
+     *
      * @see stream_get_contents
      *
      * @return string
@@ -159,11 +170,12 @@ class ExecutionStream
     }
 
     /**
-     * Read a $length bytes from stderr
+     * Read a $length bytes from stderr.
      *
      * @see ExecutionStream::read
      *
      * @param int $length
+     *
      * @return string
      */
     public function readError($length)
@@ -172,7 +184,7 @@ class ExecutionStream
     }
 
     /**
-     * Read line from stderr
+     * Read line from stderr.
      *
      * @see ExecutionStream::readline
      *
@@ -196,18 +208,22 @@ class ExecutionStream
     }
 
     /**
-     * Close the stdio stream (and by extension stderr)
+     * Close the stdio stream (and by extension stderr).
+     *
      * @return $this
      */
     public function close()
     {
         fclose($this->stdio);
+
         return $this;
     }
 
     /**
      * Read all unconsumed data from the stdio stream and close it.
+     *
      * @param bool $wait_for_eof should we read until EOF or until end of input.
+     *
      * @return string
      */
     public function readAndClose($wait_for_eof)
@@ -219,6 +235,7 @@ class ExecutionStream
         }
         $result = $this->readToEnd();
         $this->close();
+
         return $result;
     }
 }

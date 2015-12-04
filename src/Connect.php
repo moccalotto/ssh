@@ -19,7 +19,7 @@ class Connect implements Contract\ConnectorContract
         }
 
         $this->host = $host;
-        $this->port = (int)$port;
+        $this->port = (int) $port;
     }
 
     public static function to($host, $port = null)

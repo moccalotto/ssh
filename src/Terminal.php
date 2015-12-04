@@ -16,6 +16,7 @@ class Terminal
 
     /**
      * Create new instance.
+     *
      * @return Terminal
      */
     public static function create()
@@ -24,9 +25,10 @@ class Terminal
     }
 
     /**
-     * Get the SSH2 terminal unit value
+     * Get the SSH2 terminal unit value.
      * 
      * @param string $dimensionUnits chars|pixels
+     *
      * @return int
      *
      * @throws UnexpectedValueException if the unit name is incorrect
@@ -34,7 +36,7 @@ class Terminal
     public function getDimensionUnitsId($dimensionUnits)
     {
         $map = [
-            'chars'  => SSH2_TERM_UNIT_CHARS,
+            'chars' => SSH2_TERM_UNIT_CHARS,
             'pixels' => SSH2_TERM_UNIT_PIXELS,
         ];
 
@@ -53,10 +55,12 @@ class Terminal
      * Set the unit that width and height are given in.
      *
      * @param string $dimensionUnits chars|pixels
-     * @param boolean $force
+     * @param bool   $force
+     *
      * @return $this;
+     *
      * @throws UnexpectedValueException if $dimensionUnits is not "chars" or "pixels".
-     * @throws LogicException if the dimensionUnits has been set to pixels, but is changed back to chars or vice versa.
+     * @throws LogicException           if the dimensionUnits has been set to pixels, but is changed back to chars or vice versa.
      */
     public function dimensionUnits($dimensionUnits)
     {
@@ -70,6 +74,7 @@ class Terminal
         // Allow setting dimensionUnits once
         if (null === $this->dimensionUnits) {
             $this->dimensionUnits = $candidate;
+
             return $this;
         }
 
@@ -83,8 +88,9 @@ class Terminal
     /**
      * Set the width of the terminal.
      *
-     * @param int $width
+     * @param int    $width
      * @param string $dimensionUnits chars|pixels
+     *
      * @return $this;
      */
     public function width($width, $dimensionUnits = null)
@@ -93,14 +99,16 @@ class Terminal
         if (null === $dimensionUnits) {
             return $this;
         }
+
         return $this->dimensionUnits($dimensionUnits, false);
     }
 
     /**
      * Set the height of the terminal.
      *
-     * @param int $height
+     * @param int    $height
      * @param string $dimensionUnits chars|pixels
+     *
      * @return $this;
      */
     public function height($height, $dimensionUnits = null)
@@ -109,6 +117,7 @@ class Terminal
         if (null === $dimensionUnits) {
             return $this;
         }
+
         return $this->dimensionUnits($dimensionUnits, false);
     }
 
@@ -116,17 +125,20 @@ class Terminal
      * Add environment variable(s) to the terminal.
      *
      * @param string|array $key
-     * @param mixed $value
+     * @param mixed        $value
+     *
      * @return $this;
      */
     public function env($key, $value = null)
     {
         if (is_array($key)) {
             $this->env = array_merge($this->env, $key);
+
             return $this;
         }
 
         $this->env[$key] = $value;
+
         return $this;
     }
 
