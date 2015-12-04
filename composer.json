@@ -22,7 +22,7 @@
     },
     "autoload" : {
         "psr-4": {
-            "Moccalotto\\Ssh\\": ""
+            "Moccalotto\\Ssh\\": "src/"
         }
     }
 }
