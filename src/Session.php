@@ -6,6 +6,9 @@ use UnexpectedValueException;
 use Moccalotto\Ssh\Contract\ConnectorContract;
 use Moccalotto\Ssh\Contract\AuthenticatorContract;
 
+use Moccalotto\Ssh\Exceptions\ConnectionException;
+use Moccalotto\Ssh\Exceptions\AuthenticationException;
+
 class Session
 {
     /**
@@ -76,7 +79,7 @@ class Session
 
     /**
      * Get the SSH2 fingerprint encoding ID.
-     * 
+     *
      * @param string $encoding hex|raw
      *
      * @return int
