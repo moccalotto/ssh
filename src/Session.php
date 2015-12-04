@@ -5,7 +5,6 @@ namespace Moccalotto\Ssh;
 use UnexpectedValueException;
 use Moccalotto\Ssh\Contracts\ConnectorContract;
 use Moccalotto\Ssh\Contracts\AuthenticatorContract;
-
 use Moccalotto\Ssh\Exceptions\ConnectionException;
 use Moccalotto\Ssh\Exceptions\AuthenticationException;
 
