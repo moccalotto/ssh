@@ -20,7 +20,6 @@ $pubkeyfile = '/path/to/my/key/id_rsa';
 $privkeyfile = 'path/to/my/key/id_rsa.pub';
 $keypass = 'my_password';
 
-
 /*
 | Create an SSH session
 |-----------------------
@@ -32,8 +31,6 @@ $ssh = new Session(
     Connect::to($ip, $port),
     Auth::viaKeyFile($username, $pubkeyfile, $privkeyfile, $keypass)
 );
-
-
 
 /*
 | Open a SFTP channel
@@ -53,7 +50,6 @@ if ($random == $sftp->getContents('testFile.txt')) {
     echo PHP_EOL;
 }
 
-
 /*
 | Create terminal settings
 |--------------------------
@@ -64,7 +60,6 @@ if ($random == $sftp->getContents('testFile.txt')) {
 $terminal = Terminal::create()
     ->width(80, 'chars')
     ->height(25, 'chars');
-
 
 /*
 | Execute a single command on the remote server
@@ -81,10 +76,8 @@ echo PHP_EOL;
 | Simply send this file (demo.php) to the remote server.
 */
 if ($ssh->sendFile(__FILE__, basename(__FILE__))) {
-    printf('File: %s was sent to the remote server' . PHP_EOL, basename(__FILE__));
+    printf('File: %s was sent to the remote server'.PHP_EOL, basename(__FILE__));
 }
-
-
 
 /*
 | Open a shell on the remote server
@@ -95,7 +88,7 @@ if ($ssh->sendFile(__FILE__, basename(__FILE__))) {
 | Print the output from the shell.
 | The shell is automatically closed when callback returns.
 */
-echo $ssh->withTerminal($terminal)->shell(function($shell) {
+echo $ssh->withTerminal($terminal)->shell(function ($shell) {
 
     $captured_output = $shell
         ->writeline('echo The home dir is: $HOME')
@@ -105,6 +98,5 @@ echo $ssh->withTerminal($terminal)->shell(function($shell) {
         ->readToEnd();
 
     return $captured_output;
-
 });
 ```
