@@ -43,7 +43,10 @@ class Auth implements Contracts\AuthenticatorContract
      */
     public static function viaPassword($username, $password)
     {
-        return new static('ssh2_auth_password', func_get_args());
+        return new static('ssh2_auth_password', [
+            $username,
+            $password,
+        ]);
     }
 
     /**
@@ -60,7 +63,12 @@ class Auth implements Contracts\AuthenticatorContract
      */
     public static function viaKeyFile($username, $pubkeyfile, $privkeyfile, $passphrase = null)
     {
-        return new static('ssh2_auth_pubkey_file', func_get_args());
+        return new static('ssh2_auth_pubkey_file', [
+            $username,
+            $pubkeyfile,
+            $privkeyfile,
+            $passphrase,
+        ]);
     }
 
     /**
@@ -76,7 +84,7 @@ class Auth implements Contracts\AuthenticatorContract
      */
     public static function viaAgent($username)
     {
-        return new static('ssh2_auth_agent', func_get_args());
+        return new static('ssh2_auth_agent', [$username]);
     }
 
     /**
@@ -94,6 +102,9 @@ class Auth implements Contracts\AuthenticatorContract
             throw new UnexpectedValueException('Parameter must be a valid SSH2 Session resource');
         }
 
-        return call_user_func($this->method, $resource, ...$this->params);
+        $args = $this->params;
+        array_unshift($args, $resource);
+
+        return call_user_func_array($this->method, $args);
     }
 }
