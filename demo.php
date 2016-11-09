@@ -12,7 +12,7 @@ $ip = '127.0.0.1';
 $username = 'my_username';
 $port = 22;
 $privkeyfile = '/path/to/my/key/id_rsa';
-$pubkeyfile = 'path/to/my/key/id_rsa.pub';
+$pubkeyfile  = '/path/to/my/key/id_rsa.pub';
 $keypass = 'my_password';
 
 /*
