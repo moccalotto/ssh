@@ -11,8 +11,8 @@ require 'vendor/autoload.php';
 $ip = '127.0.0.1';
 $username = 'my_username';
 $port = 22;
-$pubkeyfile = '/path/to/my/key/id_rsa';
-$privkeyfile = 'path/to/my/key/id_rsa.pub';
+$privkeyfile = '/path/to/my/key/id_rsa';
+$pubkeyfile = 'path/to/my/key/id_rsa.pub';
 $keypass = 'my_password';
 
 /*
