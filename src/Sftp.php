@@ -39,6 +39,18 @@ class Sftp
     }
 
     /**
+     * Indicates whether the specified distant file exists
+     *
+     * @param  string $filename The distant filename
+     *
+     * @return boolean
+     */
+    public function exists($remote_file)
+    {
+        return file_exists($this->streamUri($remote_file));
+    }
+
+    /**
      * Write a string to a remote file.
      *
      * @param string $remote_file
